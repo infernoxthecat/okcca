@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ok!cca — find your people at NUS</title>
+<meta name="description" content="ok!cca is the NUS CCA platform that shows you what a club is actually like — before you commit. Day-in-the-life posts, real member takes, and a 2-minute quiz that matches you to CCAs worth exploring." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --ink:#1B1B2F;
+    --paper:#FAF6EF;
+    --paper-dim:#F0E9D8;
+    --coral:#FF5A36;
+    --sunshine:#FFC94D;
+    --moss:#2A6656;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+  .font-display{ font-family:'Anton', 'Plus Jakarta Sans', sans-serif; letter-spacing:0.01em; }
+  .font-mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  .noise-border{
+    border:2.5px solid var(--ink);
+  }
+
+  .btn-primary{
+    background:var(--coral);
+    color:var(--paper);
+    border:2.5px solid var(--ink);
+    box-shadow:5px 5px 0 var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
+  .btn-primary:active{ transform:translate(1px,1px); box-shadow:3px 3px 0 var(--ink); }
+
+  .card-hard{
+    border:2.5px solid var(--ink);
+    box-shadow:6px 6px 0 var(--ink);
+  }
+
+  /* Story stack */
+  .story-card{
+    position:absolute;
+    width:190px;
+    aspect-ratio:9/16;
+    border-radius:1.1rem;
+    border:3px solid var(--ink);
+    box-shadow:8px 8px 0 rgba(27,27,47,0.9);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:0.9rem;
+    color:var(--paper);
+  }
+  .story-card .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:rgba(27,27,47,0.55);
+    display:inline-block;
+    padding:0.15rem 0.45rem;
+    border-radius:999px;
+    margin-bottom:0.4rem;
+    width:fit-content;
+  }
+  .story-card .cap{
+    font-weight:700;
+    font-size:0.92rem;
+    line-height:1.25;
+  }
+  .story-1{ background:radial-gradient(120% 100% at 20% 0%, #FF8A5C, var(--coral)); left:0; top:14px; transform:rotate(-9deg); z-index:1; }
+  .story-2{ background:radial-gradient(120% 100% at 80% 0%, #4B8F7D, var(--moss)); left:118px; top:-6px; transform:rotate(4deg); z-index:2; }
+  .story-3{ background:radial-gradient(120% 100% at 50% 0%, #FFDA84, var(--sunshine)); left:236px; top:34px; transform:rotate(-3deg); z-index:1; color:var(--ink); }
+  .story-3 .tag{ background:rgba(27,27,47,0.15); color:var(--ink); }
+
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    border:2px solid var(--ink);
+    padding:0.45rem 0.8rem;
+    border-radius:999px;
+    cursor:pointer;
+    user-select:none;
+    transition:background .12s ease, color .12s ease, transform .12s ease;
+    background:var(--paper);
+  }
+  .chip.on{
+    background:var(--ink);
+    color:var(--paper);
+    transform:translateY(-1px);
+  }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .btn-primary{ transition:none; }
+  }
+
+  @media (max-width: 640px){
+    .story-stack{ transform:scale(0.82); transform-origin:top left; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="max-w-6xl mx-auto px-6 md:px-8 py-6 flex items-center justify-between">
+  <a href="#top" class="font-display text-2xl">ok!cca<span style="color:var(--coral)">.</span></a>
+  <a href="#join" class="hidden sm:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider noise-border rounded-full px-4 py-2 hover:bg-[var(--ink)] hover:text-[var(--paper)] transition-colors">
+    Reserve your spot
+  </a>
+</header>
+
+<!-- HERO -->
+<section id="top" class="max-w-6xl mx-auto px-6 md:px-8 pt-6 pb-20 md:pb-28 grid md:grid-cols-2 gap-14 items-center">
+  <div class="reveal in">
+    <p class="eyebrow mb-4" style="color:var(--coral)">Coming soon to NUS</p>
+    <h1 class="font-display text-[2.6rem] leading-[1.05] sm:text-6xl sm:leading-[1.03] mb-6">
+      Know a CCA<br/>before you<br/>join a CCA.
+    </h1>
+    <p class="text-base sm:text-lg max-w-md mb-8" style="color:rgba(27,27,47,0.8)">
+      ok!cca is where NUS clubs post what membership is <em>really</em> like — no Telegram-channel archaeology,
+      no needing a friend on the inside. Just honest, day-in-the-life posts and a quiz that points you
+      to the CCAs worth your time.
+    </p>
+    <div class="flex flex-wrap items-center gap-4">
+      <a href="#join" class="btn-primary font-mono text-sm uppercase tracking-wider px-6 py-3 rounded-full inline-block">
+        Reserve your spot →
+      </a>
+      <span class="font-mono text-xs" style="color:rgba(27,27,47,0.6)">First 100 get into the launch fair</span>
+    </div>
+  </div>
+
+  <div class="story-stack relative h-[300px] sm:h-[340px] justify-self-center">
+    <div class="story-card story-1">
+      <span class="tag">Hiking Club</span>
+      <p class="cap">6am summit, wrong bus taken twice, 10/10 would repeat.</p>
+    </div>
+    <div class="story-card story-2">
+      <span class="tag">Dance Ensemble</span>
+      <p class="cap">Auditions aren't as scary as the seniors make it sound.</p>
+    </div>
+    <div class="story-card story-3">
+      <span class="tag">Debate Society</span>
+      <p class="cap">We argue about lunch orders with the same energy as finals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10">
+  <div class="reveal max-w-2xl mb-12">
+    <p class="eyebrow mb-3" style="color:var(--moss)">The problem</p>
+    <h2 class="font-display text-3xl sm:text-4xl leading-tight">
+      Right now, finding out what a CCA is actually like takes a whole semester of guesswork.
+    </h2>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="reveal card-hard rounded-2xl p-7 bg-white">
+      <p class="eyebrow mb-4" style="color:var(--coral)">Without ok!cca</p>
+      <ul class="space-y-3 text-[0.95rem]" style="color:rgba(27,27,47,0.85)">
+        <li>→ Six different Telegram/Instagram channels to track, half of them inactive</li>
+        <li>→ Official descriptions that all read the same: "passionate", "family", "come join us!"</li>
+        <li>→ The honest take only exists if you happen to know a member</li>
+        <li>→ You commit to a CIP/CCA point requirement before you know if it's a fit</li>
+      </ul>
+    </div>
+    <div class="reveal card-hard rounded-2xl p-7" style="background:var(--ink); color:var(--paper)">
+      <p class="eyebrow mb-4" style="color:var(--sunshine)">With ok!cca</p>
+      <ul class="space-y-3 text-[0.95rem]" style="color:rgba(250,246,239,0.9)">
+        <li>→ Every CCA in one place, posting real updates the way they'd post on Instagram</li>
+        <li>→ "Day in the life" posts from actual members — the commitments, the fun, the fine print</li>
+        <li>→ A 2-minute onboarding quiz that shortlists CCAs based on how you actually want to spend your time</li>
+        <li>→ Know the vibe before the first meeting, not after three</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 1: DAY IN THE LIFE -->
+<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
+  <div class="reveal order-2 md:order-1">
+    <p class="eyebrow mb-3" style="color:var(--coral)">Feature 01</p>
+    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Day in the Life, posted like it's Instagram — because it basically is.</h3>
+    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
+      CCA members post short, unfiltered glimpses into their week: training sessions, committee chaos,
+      the pre-performance nerves. It's the closest you'll get to shadowing a member without
+      actually knowing one.
+    </p>
+    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Real posts, real members, updated weekly</p>
+  </div>
+  <div class="reveal order-1 md:order-2 justify-self-center">
+    <div class="card-hard rounded-[2rem] p-5 bg-white w-[260px]">
+      <div class="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#FF8A5C,var(--coral))"></div>
+        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#4B8F7D,var(--moss))"></div>
+        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#FFDA84,var(--sunshine))"></div>
+        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#C7A0FF,#7A5AF8)"></div>
+      </div>
+      <div class="rounded-2xl overflow-hidden border-2 border-[var(--ink)] aspect-[9/13] flex flex-col justify-end p-4" style="background:radial-gradient(120% 100% at 30% 0%, #FF8A5C, var(--coral))">
+        <span class="tag" style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(27,27,47,.55);color:var(--paper);width:fit-content;padding:.15rem .45rem;border-radius:999px;margin-bottom:.5rem;">Netball Club · 2h ago</span>
+        <p class="text-white font-semibold text-sm leading-snug">Match day. Lost 34–28 but the team dinner after made up for it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 2: PERSONALITY QUIZ -->
+<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
+  <div class="reveal justify-self-center order-1">
+    <div class="card-hard rounded-2xl p-6 bg-white w-[280px] sm:w-[320px]">
+      <p class="eyebrow mb-1" style="color:var(--coral)">Question 3 of 8</p>
+      <h4 class="font-display text-xl mb-5 leading-snug">A packed week feels most like you when it's...</h4>
+      <div class="space-y-3">
+        <div class="chip w-full text-left on">Structured — training, a schedule, clear goals</div>
+        <div class="chip w-full text-left">Social — hanging out matters more than output</div>
+        <div class="chip w-full text-left">Creative — making something from nothing</div>
+      </div>
+      <div class="mt-6 h-1.5 rounded-full bg-[var(--paper-dim)] overflow-hidden">
+        <div class="h-full" style="width:37%; background:var(--coral)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal order-2">
+    <p class="eyebrow mb-3" style="color:var(--moss)">Feature 02</p>
+    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">A 2-minute quiz that shortlists CCAs for you, on day one.</h3>
+    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
+      During onboarding, answer a handful of questions about how you like to spend your time and what
+      you're looking for — community, competition, creative outlet, resume line. ok!cca matches you to
+      CCAs worth exploring first, instead of scrolling through all of them cold.
+    </p>
+    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">No wrong answers, just a better starting point</p>
+  </div>
+</section>
+
+<!-- SIGN UP -->
+<section id="join" class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10">
+  <div class="grid md:grid-cols-5 gap-10 items-start">
+    <div class="md:col-span-2 reveal">
+      <p class="eyebrow mb-3" style="color:var(--coral)">Reserve your spot</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-5">Get in before it opens.</h2>
+      <div class="card-hard rounded-2xl p-5" style="background:var(--sunshine)">
+        <p class="font-mono text-xs uppercase tracking-wider mb-1">Launch perk</p>
+        <p class="text-sm font-semibold">
+          The first 100 sign-ups get an invite to our launch event — a mini student life fair where
+          every participating CCA sets up a booth in one afternoon.
+        </p>
+      </div>
+    </div>
+
+    <div class="md:col-span-3 reveal">
+      <form id="signup-form" class="card-hard rounded-2xl p-7 bg-white space-y-6">
+        <div>
+          <label for="email" class="eyebrow block mb-2">Your NUS or personal email</label>
+          <input required type="email" id="email" name="email" placeholder="you@u.nus.edu"
+            class="w-full noise-border rounded-xl px-4 py-3 bg-[var(--paper)] focus:outline-none focus:ring-4 focus:ring-[var(--coral)]/30" />
+        </div>
+
+        <div>
+          <p class="eyebrow block mb-3">Which kinds of CCAs interest you? <span class="normal-case font-sans font-normal text-[0.7rem]" style="color:rgba(27,27,47,0.55)">(pick any)</span></p>
+          <div class="flex flex-wrap gap-2" id="cca-chips">
+            <div class="chip">Performing Arts</div>
+            <div class="chip">Sports &amp; Fitness</div>
+            <div class="chip">Cultural &amp; Language</div>
+            <div class="chip">Community Service</div>
+            <div class="chip">Academic &amp; Professional</div>
+            <div class="chip">Media &amp; Arts</div>
+            <div class="chip">Uniformed Groups</div>
+            <div class="chip">Special Interest</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary font-mono text-sm uppercase tracking-wider px-6 py-3 rounded-full w-full sm:w-auto">
+          Reserve your spot →
+        </button>
+        <p class="font-mono text-[0.68rem]" style="color:rgba(27,27,47,0.5)">
+          We'll only email you about the ok!cca launch. No spam, no data sold.
+        </p>
+      </form>
+
+      <div id="success-state" class="hidden card-hard rounded-2xl p-8 bg-white text-center">
+        <p class="eyebrow mb-2" style="color:var(--moss)">You're on the list</p>
+        <p class="font-display text-2xl mb-2">Spot <span id="queue-number" style="color:var(--coral)"></span> reserved.</p>
+        <p class="text-sm" style="color:rgba(27,27,47,0.75)">We'll email you the moment ok!cca opens — and if you're in the first 100, your launch fair invite too.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="max-w-6xl mx-auto px-6 md:px-8 py-10 border-t-2 border-[var(--ink)]/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+  <p class="font-display text-xl">ok!cca<span style="color:var(--coral)">.</span></p>
+  <p class="font-mono text-[0.7rem] text-center sm:text-right" style="color:rgba(27,27,47,0.55)">
+    Independent student project · not affiliated with or endorsed by NUS · © 2026
+  </p>
+</footer>
+
+<script>
+  // CCA interest chip toggling
+  document.getElementById('cca-chips').addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    chip.classList.toggle('on');
+  });
+
+  // Quiz preview chip toggling (decorative)
+  document.querySelectorAll('.card-hard .chip').forEach(chip => {
+    if (chip.closest('#cca-chips')) return;
+    chip.addEventListener('click', () => {
+      chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+      chip.classList.add('on');
+    });
+  });
+
+  // Form submit (no backend — just a friendly confirmation)
+  document.getElementById('signup-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const form = document.getElementById('signup-form');
+    const success = document.getElementById('success-state');
+    const queueNumber = Math.floor(Math.random() * 63) + 38; // playful, always suggests "first 100"
+    document.getElementById('queue-number').textContent = '#' + queueNumber;
+    form.classList.add('hidden');
+    success.classList.remove('hidden');
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
