@@ -70,6 +70,22 @@
     padding:0.9rem;
     color:var(--paper);
   }
+  .story-card img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .story-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(27,27,47,0.05) 34%,rgba(27,27,47,0.9) 100%);
+    z-index:0;
+  }
+  .story-card > *:not(img){ position:relative; z-index:1; }
   .story-card .tag{
     font-family:'IBM Plex Mono', monospace;
     font-size:0.62rem;
@@ -87,10 +103,33 @@
     font-size:0.92rem;
     line-height:1.25;
   }
-  .story-1{ background:radial-gradient(120% 100% at 20% 0%, #FF8A5C, var(--coral)); left:0; top:14px; transform:rotate(-9deg); z-index:1; }
-  .story-2{ background:radial-gradient(120% 100% at 80% 0%, #4B8F7D, var(--moss)); left:118px; top:-6px; transform:rotate(4deg); z-index:2; }
-  .story-3{ background:radial-gradient(120% 100% at 50% 0%, #FFDA84, var(--sunshine)); left:236px; top:34px; transform:rotate(-3deg); z-index:1; color:var(--ink); }
+  .story-1{ background:var(--coral); left:0; top:14px; transform:rotate(-9deg); z-index:1; }
+  .story-1 img{ object-position:center 58%; }
+  .story-2{ background:var(--moss); left:118px; top:-6px; transform:rotate(4deg); z-index:2; }
+  .story-2 img{ object-position:center center; }
+  .story-3{ background:var(--sunshine); left:236px; top:34px; transform:rotate(-3deg); z-index:1; color:var(--paper); }
+  .story-3 img{ object-position:center 32%; }
   .story-3 .tag{ background:rgba(27,27,47,0.15); color:var(--ink); }
+
+  .post-card{
+    position:relative;
+    background:var(--coral);
+  }
+  .post-card img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+  }
+  .post-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,rgba(27,27,47,0.05) 38%,rgba(27,27,47,0.88) 100%);
+  }
+  .post-card > *{ position:relative; z-index:1; }
 
   .chip{
     font-family:'IBM Plex Mono', monospace;
@@ -154,15 +193,18 @@
 
   <div class="story-stack relative h-[300px] sm:h-[340px] justify-self-center">
     <div class="story-card story-1">
-      <span class="tag">Hiking Club</span>
+      <img src="pictures/nusmountaineering.jpg" alt="NUS Mountaineering Club members on a mountain" />
+      <span class="tag">Mountaineering</span>
       <p class="cap">6am summit, wrong bus taken twice, 10/10 would repeat.</p>
     </div>
     <div class="story-card story-2">
+      <img src="pictures/nusdanceensemble.jpg" alt="NUS Dance Ensemble performance" />
       <span class="tag">Dance Ensemble</span>
       <p class="cap">Auditions aren't as scary as the seniors make it sound.</p>
     </div>
     <div class="story-card story-3">
-      <span class="tag">Debate Society</span>
+      <img src="pictures/nusdebate.jpg" alt="NUS English Debate team" />
+      <span class="tag">English Debate</span>
       <p class="cap">We argue about lunch orders with the same energy as finals.</p>
     </div>
   </div>
@@ -219,9 +261,10 @@
         <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#FFDA84,var(--sunshine))"></div>
         <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#C7A0FF,#7A5AF8)"></div>
       </div>
-      <div class="rounded-2xl overflow-hidden border-2 border-[var(--ink)] aspect-[9/13] flex flex-col justify-end p-4" style="background:radial-gradient(120% 100% at 30% 0%, #FF8A5C, var(--coral))">
+      <div class="post-card rounded-2xl overflow-hidden border-2 border-[var(--ink)] aspect-[9/13] flex flex-col justify-end p-4">
+        <img src="pictures/nusnetball.jpg" alt="NUS Netball Club players during a match" />
         <span class="tag" style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(27,27,47,.55);color:var(--paper);width:fit-content;padding:.15rem .45rem;border-radius:999px;margin-bottom:.5rem;">Netball Club · 2h ago</span>
-        <p class="text-white font-semibold text-sm leading-snug">Match day. Lost 34–28 but the team dinner after made up for it.</p>
+        <p class="text-white font-semibold text-sm leading-snug">Match day. Winning was the expectation, team dinner was the highlight.</p>
       </div>
     </div>
   </div>
