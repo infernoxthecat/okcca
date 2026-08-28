@@ -7,25 +7,42 @@
 <meta name="description" content="ok!cca is the NUS CCA platform that shows you what a club is actually like — before you commit. Day-in-the-life posts, real member takes, and a 2-minute quiz that matches you to CCAs worth exploring." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   :root{
     --ink:#1B1B2F;
-    --paper:#FAF6EF;
-    --paper-dim:#F0E9D8;
+    --paper:#FFF9F3;
+    --paper-dim:#F4EBDD;
     --coral:#FF5A36;
-    --sunshine:#FFC94D;
+    --coral-deep:#EB492C;
+    --sunshine:#F7C86A;
     --moss:#2A6656;
+    --moss-soft:#DDECE6;
+    --shadow:rgba(27,27,47,0.16);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--paper);
+    background:
+      radial-gradient(circle at top left, rgba(255,90,54,0.12), transparent 32%),
+      radial-gradient(circle at bottom right, rgba(42,102,86,0.08), transparent 28%),
+      linear-gradient(180deg, var(--paper) 0%, #F8F1E8 100%);
     color:var(--ink);
-    font-family:'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    font-family:'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
+    position:relative;
   }
-  .font-display{ font-family:'Anton', 'Plus Jakarta Sans', sans-serif; letter-spacing:0.01em; }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:radial-gradient(rgba(27,27,47,0.045) 0.7px, transparent 0.7px);
+    background-size:14px 14px;
+    mask-image:radial-gradient(circle at center, black 32%, transparent 100%);
+    opacity:0.8;
+  }
+  .font-display{ font-family:'Anton', 'Nunito Sans', sans-serif; letter-spacing:0.01em; }
   .font-mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
 
   .eyebrow{
@@ -37,22 +54,24 @@
   }
 
   .noise-border{
-    border:2.5px solid var(--ink);
+    border:2px solid var(--ink);
+    background:rgba(255,255,255,0.18);
   }
 
   .btn-primary{
-    background:var(--coral);
+    background:linear-gradient(180deg, var(--coral) 0%, var(--coral-deep) 100%);
     color:var(--paper);
     border:2.5px solid var(--ink);
-    box-shadow:5px 5px 0 var(--ink);
-    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:4px 4px 0 var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
   }
-  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
+  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); filter:saturate(1.05); }
   .btn-primary:active{ transform:translate(1px,1px); box-shadow:3px 3px 0 var(--ink); }
 
   .card-hard{
     border:2.5px solid var(--ink);
     box-shadow:6px 6px 0 var(--ink);
+    border-radius:1.5rem;
   }
 
   /* Story carousel */
@@ -70,11 +89,11 @@
     top:14px;
     left:50%;
     margin-left:-95px;
-    width:190px;
+    width:200px;
     aspect-ratio:9/16;
-    border-radius:1.1rem;
+    border-radius:1.3rem;
     border:3px solid var(--ink);
-    box-shadow:8px 8px 0 rgba(27,27,47,0.9);
+    box-shadow:10px 10px 0 rgba(27,27,47,0.88);
     overflow:hidden;
     display:flex;
     flex-direction:column;
@@ -175,13 +194,16 @@
     border-radius:999px;
     cursor:pointer;
     user-select:none;
-    transition:background .12s ease, color .12s ease, transform .12s ease;
+    transition:background .12s ease, color .12s ease, transform .12s ease, box-shadow .12s ease;
     background:var(--paper);
+    box-shadow:0 0 0 rgba(27,27,47,0);
   }
+  .chip:hover{ transform:translateY(-1px); }
   .chip.on{
     background:var(--ink);
     color:var(--paper);
     transform:translateY(-1px);
+    box-shadow:2px 2px 0 rgba(27,27,47,0.15);
   }
 
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
@@ -201,7 +223,10 @@
 
 <!-- NAV -->
 <header class="max-w-6xl mx-auto px-6 md:px-8 py-6 flex items-center justify-between">
-  <a href="#top" class="font-display text-2xl">ok!cca<span style="color:var(--coral)">.</span></a>
+  <a href="#top" class="flex items-center gap-3 font-display text-2xl leading-none">
+    <img src="pictures/okccalogo.jpg" alt="ok!cca logo" class="h-10 w-10 object-contain rounded-xl border-[2.5px] border-[var(--ink)] bg-[var(--paper)] shadow-[3px_3px_0_var(--ink)]" />
+    <span>ok!cca<span style="color:var(--coral)">.</span></span>
+  </a>
   <a href="#join" class="hidden sm:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider noise-border rounded-full px-4 py-2 hover:bg-[var(--ink)] hover:text-[var(--paper)] transition-colors">
     Reserve your spot
   </a>
@@ -281,26 +306,42 @@
 <section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
   <div class="reveal order-2 md:order-1">
     <p class="eyebrow mb-3" style="color:var(--coral)">Feature 01</p>
-    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Day in the Life, posted like it's Instagram — because it basically is.</h3>
+    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Know the CCA before the first meeting.</h3>
     <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
-      CCA members post short, unfiltered glimpses into their week: training sessions, committee chaos,
-      the pre-performance nerves. It's the closest you'll get to shadowing a member without
-      actually knowing one.
+      Every club page brings together the details students actually need: upcoming events, time and
+      commitment levels, member expectations, and honest on-the-ground reviews about what the club feels
+      like in day-to-day life.
     </p>
-    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Real posts, real members, updated weekly</p>
+    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Clear signal before the first meeting</p>
   </div>
   <div class="reveal order-1 md:order-2 justify-self-center">
-    <div class="card-hard rounded-[2rem] p-5 bg-white w-[260px]">
-      <div class="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
-        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#FF8A5C,var(--coral))"></div>
-        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#4B8F7D,var(--moss))"></div>
-        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#FFDA84,var(--sunshine))"></div>
-        <div class="w-12 h-12 rounded-full shrink-0 border-2 border-[var(--ink)]" style="background:linear-gradient(135deg,#C7A0FF,#7A5AF8)"></div>
-      </div>
-      <div class="post-card rounded-2xl overflow-hidden border-2 border-[var(--ink)] aspect-[9/13] flex flex-col justify-end p-4">
-        <img src="pictures/nusnetball.jpg" alt="NUS Netball Club players during a match" />
-        <span class="tag" style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(27,27,47,.55);color:var(--paper);width:fit-content;padding:.15rem .45rem;border-radius:999px;margin-bottom:.5rem;">Netball Club · 2h ago</span>
-        <p class="text-white font-semibold text-sm leading-snug">Match day. Winning was the expectation, team dinner was the highlight.</p>
+    <div class="card-hard rounded-[2rem] bg-white w-[360px] sm:w-[430px] overflow-hidden">
+      <div class="flex items-stretch">
+        <div class="w-[42%] border-r-2 border-[var(--ink)]">
+          <img src="pictures/nusnetball.jpg" alt="NUS Netball Club players during a match" class="h-full w-full object-cover" />
+        </div>
+        <div class="flex flex-1 flex-col justify-between p-4">
+          <div>
+            <div class="mb-3 flex items-center justify-between gap-3">
+              <span class="font-mono text-[0.6rem] uppercase tracking-[0.12em]" style="color:var(--moss)">Netball Club</span>
+            </div>
+            <p class="text-[0.95rem] leading-relaxed" style="color:rgba(27,27,47,0.86);">
+              “The vibe is super welcoming — everyone’s so easy to talk to, and it feels like a real community.”
+              <span class="mt-2 block font-mono text-[0.52rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.65);">an AY25/26 member said...</span>
+            </p>
+          </div>
+
+          <div class="mt-4 space-y-2 border-t-2 border-[var(--ink)] pt-3">
+            <div class="flex items-center justify-between gap-3 text-[0.72rem]">
+              <span class="font-mono uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.6);">Commitment</span>
+              <span class="font-semibold" style="color:var(--ink);">2-3 evenings / week</span>
+            </div>
+            <div class="flex items-center justify-between gap-3 text-[0.72rem]">
+              <span class="font-mono uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.6);">Tryout</span>
+              <span class="font-semibold" style="color:var(--ink);">12 Sep, 6:30pm</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -331,6 +372,89 @@
       CCAs worth exploring first, instead of scrolling through all of them cold.
     </p>
     <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">No wrong answers, just a better starting point</p>
+  </div>
+</section>
+
+<!-- FEATURE 3: WISHLIST -->
+<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
+  <div class="reveal justify-self-center order-1 md:order-1">
+    <div class="card-hard rounded-2xl p-4 bg-white w-[330px] sm:w-[360px]">
+      <div class="mb-4 flex items-center justify-between">
+        <p class="eyebrow" style="color:var(--coral)">Saved</p>
+        <span class="font-mono text-[0.65rem] uppercase tracking-wide rounded-full border-2 border-[var(--ink)] px-2 py-1 bg-[var(--paper-dim)]">3 items</span>
+      </div>
+      <div class="space-y-3" style="font-family: 'Nunito Sans', sans-serif;">
+        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-[var(--paper-dim)] p-2.5" style="background:rgba(244,235,221,0.96);">
+          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--sunshine)] text-center" style="background:rgba(247,200,106,0.75);">
+            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Aug</span>
+            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">31</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">NUS Dance Blast</p>
+            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Recruitment deadline</p>
+            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
+              <span>⏱</span>
+              <span>11:59pm</span>
+            </div>
+          </div>
+          <button aria-label="Reminder for NUS Dance Blast" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--coral)] text-white" title="Set reminder">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
+              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-white p-2.5">
+          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--paper-dim)] text-center" style="background:rgba(244,235,221,0.9);">
+            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Sep</span>
+            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">02</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">Netball Club</p>
+            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Open trial</p>
+            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
+              <span>⏱</span>
+              <span>5:30pm</span>
+            </div>
+          </div>
+          <button aria-label="Reminder for Netball Club" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)]" title="Set reminder">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
+              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-[var(--moss-soft)] p-2.5" style="background:rgba(221,236,230,0.9);">
+          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--sunshine)] text-center" style="background:rgba(247,200,106,0.75);">
+            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Sep</span>
+            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">05</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">Mountaineering</p>
+            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Camp sign-up</p>
+            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
+              <span>⏱</span>
+              <span>8:00pm</span>
+            </div>
+          </div>
+          <button aria-label="Reminder for Mountaineering" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)]" title="Set reminder">
+            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
+              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal order-2 md:order-2">
+    <p class="eyebrow mb-3" style="color:var(--moss)">Feature 03</p>
+    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Wishlist the CCAs and events you want to track.</h3>
+    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
+      Save the clubs and events that catch your eye and keep them in one place as you explore your options.
+      It turns browsing into a shortlist, so you can revisit open trials, camp sign-ups, and the CCAs
+      worth a second look without losing track.
+    </p>
+    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Keep your shortlist in one clean home</p>
   </div>
 </section>
 
