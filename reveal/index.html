@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>something good is waiting</title>
+  <style>
+    :root{--plum:#441931;--coral:#EF8970;--cream:#FFF2DF;--mint:#7DD5AB;--soft:#FBE3DC;--support:#70545F}
+    *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--plum);font-family:Arial,sans-serif;min-height:100vh;display:grid;place-items:center;overflow-x:hidden}
+    .dot{position:fixed;width:9px;height:9px;border-radius:50%;opacity:.9}.d1{top:8%;left:8%;background:var(--mint)}.d2{top:15%;right:10%;background:var(--coral)}.d3{top:42%;left:5%;background:var(--coral)}.d4{top:55%;right:7%;background:var(--mint)}.d5{bottom:10%;left:12%;background:var(--coral)}.d6{bottom:8%;right:12%;background:var(--mint)}
+    main{width:min(720px,92vw);padding:28px 0 42px;text-align:center}.logo{width:88px;height:89px;object-fit:cover;border-radius:22px;margin-bottom:18px} h1{font-size:clamp(30px,6vw,54px);margin:0 0 10px;letter-spacing:-1px} .intro{color:var(--support);font-size:17px;margin:0 auto 28px}
+    .card{background:#fff;border:1px solid #E9D5CE;border-radius:26px;padding:18px;box-shadow:0 12px 30px rgba(68,25,49,.08)} video{display:block;width:100%;border-radius:17px;background:var(--plum);max-height:430px} .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:22px} a,.reveal{border:0;border-radius:999px;padding:14px 22px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer}.primary{background:var(--coral);color:var(--plum)}.secondary{background:var(--soft);color:var(--plum)}
+    #secret{display:none;margin:24px auto 0;padding:20px;border-radius:18px;background:var(--mint);font-weight:700}.code{font-size:clamp(28px,7vw,48px);letter-spacing:4px;margin-top:8px}
+    .fine{color:var(--support);font-size:12px;margin-top:28px}
+  </style>
+</head>
+<body>
+  <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="dot d4"></span><span class="dot d5"></span><span class="dot d6"></span>
+  <main>
+    <img class="logo" src="logo.jpg" alt="ok!cca logo">
+    <h1>something good is waiting</h1>
+    <p class="intro">Watch the little surprise, then unlock your secret code.</p>
+    <section class="card">
+      <video controls playsinline preload="metadata"><source src="promo_vid.mp4" type="video/mp4">Your browser does not support video playback.</video>
+      <div class="actions"><a class="primary" href="https://infernoxthecat.github.io/okcca" target="_blank" rel="noopener">Visit the landing page</a><button class="reveal secondary" onclick="document.getElementById('secret').style.display='block';this.style.display='none'">Reveal secret code</button></div>
+      <div id="secret">Your secret code<div class="code">OKCCA2026</div></div>
+    </section>
+    <p class="fine">A little mystery, just for you.</p>
+  </main>
+</body>
+</html>
