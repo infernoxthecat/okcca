@@ -657,7 +657,37 @@
   }
 
   @media (max-width: 640px){
-    .story-stack{ width:100%; }
+    .story-shell{
+      gap:0.5rem;
+      max-width:100%;
+      overflow:hidden;
+    }
+    .story-stack{
+      width:min(78vw, 340px);
+      height:350px;
+    }
+    .story-card{
+      width:min(76vw, 320px);
+      min-height:0;
+    }
+    .story-card img{
+      height:170px;
+      flex-basis:170px;
+    }
+    .story-card .story-body{
+      padding:0.8rem 0.9rem 1rem;
+    }
+    .story-card h3{
+      font-size:1rem;
+    }
+    .story-card .story-category{
+      font-size:0.9rem;
+    }
+    .story-arrow{
+      width:2.5rem;
+      height:2.5rem;
+      font-size:1.5rem;
+    }
   }
 </style>
 </head>
@@ -1091,12 +1121,16 @@
   let pointerStartX = null;
 
   function getOffset(index) {
+    const cardWidth = storyCards[0]?.getBoundingClientRect().width || 420;
+    const isMobile = window.innerWidth <= 640;
+    const spread = isMobile ? Math.min(cardWidth * 0.36, 110) : Math.min(cardWidth * 0.62, 260);
+    const farSpread = spread * 2;
     const diff = ((index - activeStory) + storyCards.length) % storyCards.length;
     const normalized = diff > storyCards.length / 2 ? diff - storyCards.length : diff;
     if (normalized === 0) return { x: 0, scale: 1, opacity: 1, z: 3, show: true };
-    if (normalized === 1) return { x: 260, scale: 0.9, opacity: 0.8, z: 2, show: true };
-    if (normalized === -1) return { x: -260, scale: 0.9, opacity: 0.8, z: 2, show: true };
-    return { x: normalized > 0 ? 520 : -520, scale: 0.8, opacity: 0, z: 1, show: false };
+    if (normalized === 1) return { x: spread, scale: 0.9, opacity: 0.8, z: 2, show: true };
+    if (normalized === -1) return { x: -spread, scale: 0.9, opacity: 0.8, z: 2, show: true };
+    return { x: normalized > 0 ? farSpread : -farSpread, scale: 0.8, opacity: 0, z: 1, show: false };
   }
 
   function renderStories() {
