@@ -76,11 +76,33 @@
 
   .cca-profile-card{
     width:min(100%, 350px);
+    max-width:100%;
     border:2px solid rgba(71,29,57,0.12);
     border-radius:1.5rem;
     background:#fff;
     overflow:hidden;
     box-shadow:0 16px 28px rgba(71,29,57,0.08);
+  }
+  @media (max-width: 480px){
+    .cca-profile-card,
+    .card-hard {
+      width:100% !important;
+      max-width:100% !important;
+    }
+
+    .card-hard {
+      padding:1.25rem;
+      border-radius:1.1rem;
+    }
+
+    .profile-summary h4 {
+      font-size:1.1rem;
+    }
+
+    .profile-tabs {
+      overflow-x:auto;
+      white-space:nowrap;
+    }
   }
   .profile-cover{
     position:relative;
