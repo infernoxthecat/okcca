@@ -42,6 +42,21 @@
     mask-image:radial-gradient(circle at center, black 32%, transparent 100%);
     opacity:0.8;
   }
+  #background-dots{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+    opacity:0.9;
+  }
+  #background-dots span{
+    position:absolute;
+    display:block;
+    border-radius:9999px;
+    filter:blur(0.2px);
+    box-shadow:0 0 0 1px rgba(71,29,57,0.025);
+  }
   .font-display{ font-family:'Nunito Sans', ui-sans-serif, sans-serif; letter-spacing:-0.02em; }
   .font-mono{ font-family:'Nunito Sans', ui-sans-serif, sans-serif; }
 
@@ -76,12 +91,13 @@
 
   .problem-layout{
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:1.2rem;
-    width:min(100%, 920px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap:1.4rem;
+    width:min(100%, 980px);
     align-items:stretch;
   }
 
+  .problem-intro,
   .problem-side,
   .problem-stacked{
     display:flex;
@@ -131,7 +147,7 @@
     min-height:7.8rem;
     border:2px solid rgba(71,29,57,0.12);
     border-radius:1.35rem;
-    background:rgba(255,255,255,0.32);
+    background:rgba(255,255,255,0.96);
     box-shadow:0 4px 0 rgba(71,29,57,0.04);
   }
 
@@ -148,7 +164,7 @@
   .problem-copy h3{
     margin:0 0 0.2rem;
     color:var(--ink);
-    font-size:clamp(1.3rem, 2.3vw, 2.2rem);
+    font-size:clamp(1.05rem, 1.7vw, 1.45rem);
     line-height:1.1;
     font-weight:900;
     letter-spacing:-0.04em;
@@ -176,7 +192,7 @@
     }
 
     .problem-copy h3{
-      font-size:1.7rem;
+      font-size:1.25rem;
     }
 
     .problem-copy p{
@@ -186,13 +202,52 @@
   }
 
   .cca-profile-card{
-    width:min(100%, 350px);
+    width:min(100%, 420px);
     max-width:100%;
     border:2px solid rgba(71,29,57,0.12);
     border-radius:1.5rem;
     background:#fff;
     overflow:hidden;
-    box-shadow:0 16px 28px rgba(71,29,57,0.08);
+    box-shadow:0 18px 30px rgba(71,29,57,0.08);
+    margin-inline:auto;
+  }
+  .feature-media-shell{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    justify-self:center;
+  }
+  .feature-article{
+    max-width:34rem;
+  }
+  .feature-article .eyebrow{
+    margin-bottom:1rem;
+    letter-spacing:0.18em;
+  }
+  .feature-article h3{
+    font-size:clamp(3.2rem, 5vw, 5rem);
+    line-height:0.92;
+    letter-spacing:-0.08em;
+    margin:0 0 1.6rem;
+    font-weight:900;
+    color:var(--ink);
+  }
+  .feature-article p{
+    max-width:32rem;
+    font-size:1.08rem;
+    line-height:1.55;
+    color:rgba(71,29,57,0.8);
+    margin:0;
+  }
+  .feature-article .tagline{
+    display:inline-block;
+    margin-top:1.7rem;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--moss);
+    font-weight:900;
   }
   @media (max-width: 480px){
     .cca-profile-card,
@@ -648,6 +703,261 @@
     box-shadow:2px 2px 0 rgba(27,27,47,0.15);
   }
 
+  .feature-search-shell{
+    width:min(100%, 380px);
+    max-width:100%;
+    aspect-ratio: 9 / 16;
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(180deg, #d7685c 0%, #b93f46 100%);
+    border:2px solid rgba(71,29,57,0.12);
+    border-radius:2rem;
+    padding:0.9rem;
+    box-shadow:0 18px 28px rgba(71,29,57,0.12);
+    margin-inline:auto;
+  }
+  .feature-media-shell{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .feature-search-bar{
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+    background:rgba(255,255,255,0.95);
+    border:2px solid rgba(71,29,57,0.1);
+    border-radius:1.2rem;
+    padding:0.85rem 1rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .feature-search-bar .icon{
+    font-size:1.4rem;
+    color:rgba(71,29,57,0.7);
+    line-height:1;
+  }
+  .feature-search-bar input{
+    background:transparent;
+    border:none;
+    outline:none;
+    width:100%;
+    color:var(--ink);
+    font-size:1.05rem;
+    font-weight:700;
+  }
+  .feature-search-bar input::placeholder{
+    color:rgba(71,29,57,0.6);
+  }
+  .feature-category-title{
+    margin:0.9rem 0 0.5rem;
+    font-size:0.68rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-weight:900;
+    color:rgba(71,29,57,0.7);
+  }
+  .feature-categories{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-template-rows:repeat(3, minmax(0, 1fr));
+    gap:0.7rem;
+    flex:1;
+    min-height:0;
+  }
+  .category-tile{
+    position:relative;
+    aspect-ratio:1 / 1;
+    min-height:0;
+    height:auto;
+    border-radius:1.2rem;
+    overflow:hidden;
+    border:2px solid rgba(71,29,57,0.1);
+    box-shadow:0 8px 0 rgba(71,29,57,0.04);
+    background:#d8d0ca;
+  }
+  .category-tile img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(0.95) contrast(1.05);
+  }
+  .category-tile::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(20,20,20,0.08), rgba(20,20,20,0.48));
+  }
+  .category-tile .label{
+    position:absolute;
+    left:0.8rem;
+    bottom:0.7rem;
+    z-index:1;
+    font-size:clamp(0.9rem, 1.4vw, 1.25rem);
+    line-height:1.05;
+    letter-spacing:-0.04em;
+    font-weight:900;
+    color:#fff;
+    text-shadow:0 2px 14px rgba(0,0,0,0.14);
+  }
+
+  .saved-card-panel{
+    width:min(100%, 480px);
+    background:#ffffff;
+    border:2px solid rgba(71,29,57,0.2);
+    border-radius:1.8rem;
+    padding:1.1rem 1rem 0.8rem;
+    box-shadow:0 10px 20px rgba(71,29,57,0.04);
+    margin-inline:auto;
+  }
+  .saved-card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:0.9rem;
+  }
+  .saved-card-header .label{
+    font-family:'Nunito Sans', sans-serif;
+    font-size:0.82rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-weight:900;
+    color:rgba(71,29,57,0.82);
+  }
+  .saved-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:5.1rem;
+    padding:0.45rem 0.8rem;
+    border-radius:999px;
+    border:2px solid rgba(71,29,57,0.24);
+    background:rgba(255,255,255,0.14);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    font-weight:900;
+    text-transform:uppercase;
+    color:var(--ink);
+  }
+  .saved-list{
+    display:flex;
+    flex-direction:column;
+    gap:0.8rem;
+  }
+  .saved-item{
+    display:grid;
+    grid-template-columns: 70px minmax(0,1fr) 42px;
+    gap:0.8rem;
+    align-items:center;
+    background:rgba(255,255,255,0.16);
+    border:2px solid rgba(71,29,57,0.12);
+    border-radius:1.3rem;
+    padding:0.7rem 0.8rem;
+    box-shadow:inset 0 0 0 1px rgba(71,29,57,0.02);
+  }
+  .saved-date{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:54px;
+    border-radius:0.8rem;
+    border:1px solid rgba(71,29,57,0.14);
+    font-weight:900;
+    color:var(--ink);
+    background:rgba(241,208,146,0.62);
+  }
+  .saved-date .month{
+    font-size:0.5rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    line-height:1.2;
+    margin-bottom:0.1rem;
+    color:rgba(71,29,57,0.78);
+  }
+  .saved-date .day{
+    font-size:2rem;
+    line-height:1;
+    letter-spacing:-0.08em;
+  }
+  .saved-item[data-tone="soft"] .saved-date{ background:rgba(220,230,236,0.7); }
+  .saved-item[data-tone="mint"] .saved-date{ background:rgba(186,226,212,0.7); }
+  .saved-item .meta{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:0.15rem;
+  }
+  .saved-item .club{
+    font-size:0.58rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:rgba(71,29,57,0.72);
+    font-weight:900;
+  }
+  .saved-item .title{
+    font-size:1.1rem;
+    line-height:1.2;
+    color:var(--ink);
+    font-weight:900;
+    letter-spacing:-0.04em;
+  }
+  .saved-item .time{
+    display:flex;
+    align-items:center;
+    gap:0.45rem;
+    font-size:0.64rem;
+    color:rgba(71,29,57,0.7);
+    letter-spacing:0.02em;
+    font-weight:700;
+  }
+  .saved-item .time::before{
+    content:"◔";
+    font-size:0.9rem;
+    line-height:1;
+    transform:translateY(-1px);
+  }
+  .saved-item .action{
+    width:2.2rem;
+    height:2.2rem;
+    border-radius:999px;
+    border:2px solid rgba(71,29,57,0.2);
+    background:rgba(255,255,255,0.52);
+    color:var(--ink);
+    display:grid;
+    place-items:center;
+    font-size:1.1rem;
+    font-weight:700;
+  }
+
+  .feature-copy-block{
+    max-width:32rem;
+  }
+  .feature-copy-block h3{
+    font-size:clamp(2.3rem, 4vw, 4.2rem);
+    line-height:0.96;
+    letter-spacing:-0.06em;
+    margin:0 0 1.4rem;
+    color:var(--ink);
+    font-weight:900;
+  }
+  .feature-copy-block p{
+    font-size:1.08rem;
+    line-height:1.55;
+    color:rgba(71,29,57,0.8);
+    margin:0;
+  }
+  .feature-copy-block .tagline{
+    display:inline-block;
+    margin-top:1.5rem;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--moss);
+    font-weight:900;
+  }
+
   .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
 
@@ -692,6 +1002,7 @@
 </style>
 </head>
 <body class="antialiased">
+  <div id="background-dots" aria-hidden="true"></div>
 
 <!-- NAV -->
 <header class="max-w-6xl mx-auto px-6 md:px-8 py-6 flex items-center justify-between">
@@ -725,8 +1036,6 @@
   </div>
 
   <div class="story-shell reveal in" style="align-items:flex-end;">
-    <button type="button" class="story-arrow left" aria-label="Previous CCA">‹</button>
-
     <div class="story-stack" role="region" aria-label="CCA stories. Swipe left or right to browse." tabindex="0">
       <article class="story-card story-1">
         <img src="https://images.unsplash.com/photo-1774308190448-538999b627ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80" alt="NUS Photography Club member taking photos outdoors" />
@@ -759,34 +1068,17 @@
       </article>
     </div>
 
-    <button type="button" class="story-arrow right" aria-label="Next CCA">›</button>
   </div>
 </section>
 
 <!-- PROBLEM -->
 <section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10">
-  <div class="reveal max-w-2xl mb-12">
-    <p class="eyebrow mb-3" style="color:var(--moss)">The problem</p>
-    <h2 class="font-display text-3xl sm:text-4xl leading-tight">
-      Right now, finding out what a CCA is actually like takes a whole semester of guesswork.
-    </h2>
-  </div>
-
   <div class="problem-layout reveal">
-    <div class="problem-side">
-      <p class="eyebrow mb-1" style="color:var(--coral)">Without ok!cca</p>
-      <div class="problem-point-card">
-        <span class="problem-point-arrow">→</span>
-        <span class="problem-point-text">Six different Telegram/Instagram channels to track, half of them inactive</span>
-      </div>
-      <div class="problem-point-card">
-        <span class="problem-point-arrow">→</span>
-        <span class="problem-point-text">Official descriptions that all read the same: "passionate", "family", "come join us!"</span>
-      </div>
-      <div class="problem-point-card">
-        <span class="problem-point-arrow">→</span>
-        <span class="problem-point-text">You realised in the middle of your tutorial that tryouts were yesterday</span>
-      </div>
+    <div class="problem-intro">
+      <p class="eyebrow mb-3" style="color:var(--moss)">The problem</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight">
+        Right now, finding out what a CCA is actually like takes hours of stalking and detective work.
+      </h2>
     </div>
 
     <div class="problem-stacked">
@@ -818,19 +1110,69 @@
   </div>
 </section>
 
-<!-- FEATURE 1: DAY IN THE LIFE -->
+<!-- FEATURE 1: SEARCH & FILTER -->
+<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10">
+  <div class="grid md:grid-cols-[1fr_560px] items-center gap-6 md:gap-10">
+    <div class="feature-copy-block reveal order-2 md:order-1">
+      <p class="eyebrow" style="color:var(--coral)">Feature 01 · Discover</p>
+      <h3>Search by vibe, category, and commitment level.</h3>
+      <p>Filter CCAs by simple labels like arts and culture, CS, sports, and the kind of time commitment you actually want — whether you want to explore casually or commit fully.</p>
+      <span class="tagline">Start with the labels that feel right</span>
+    </div>
+
+    <div class="feature-media-shell reveal">
+      <div class="feature-search-shell">
+        <div class="feature-search-bar">
+          <span class="icon">⌕</span>
+          <input type="text" placeholder="Search all CCAs" aria-label="Search all CCAs" />
+        </div>
+
+        <p class="feature-category-title">Category</p>
+
+        <div class="feature-categories">
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80" alt="Photography category" />
+            <div class="label">Photography</div>
+          </div>
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Community category" />
+            <div class="label">Community</div>
+          </div>
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=900&q=80" alt="Theatre category" />
+            <div class="label">Theatre</div>
+          </div>
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80" alt="Visual arts category" />
+            <div class="label">Visual Arts</div>
+          </div>
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1547347298-4074fc3086f0?auto=format&fit=crop&w=900&q=80" alt="Sports category" />
+            <div class="label">Sports</div>
+          </div>
+          <div class="category-tile">
+            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=900&q=80" alt="Design category" />
+            <div class="label">Design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE 2: DAY IN THE LIFE -->
 <section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-start">
-  <div class="reveal order-2 md:order-1">
-    <p class="eyebrow mb-3" style="color:var(--coral)">Feature 01</p>
-    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Know the CCA before the first meeting.</h3>
-    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
+  <div class="feature-article reveal order-2 md:order-1">
+    <p class="eyebrow" style="color:var(--coral)">Feature 02 · Understand</p>
+    <h3 class="font-display">Know the CCA before the first meeting.</h3>
+    <p>
       Every club page brings together the details students actually need: upcoming events, time and
       commitment levels, member expectations, and honest on-the-ground reviews about what the club feels
       like in day-to-day life.
     </p>
-    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Clear signal before the first meeting</p>
+    <span class="tagline">Clear signal before the first meeting</span>
   </div>
-  <div class="reveal order-1 md:order-2 justify-self-center">
+  <div class="feature-media-shell reveal order-1 md:order-2">
     <div class="cca-profile-card">
       <div class="profile-cover">
         <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=900&q=80" alt="NUS Dance Blast performance" />
@@ -939,114 +1281,66 @@
   </div>
 </section>
 
-<!-- FEATURE 2: PERSONALITY QUIZ -->
-<section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
-  <div class="reveal justify-self-center order-1">
-    <div class="card-hard rounded-2xl p-6 bg-white w-[280px] sm:w-[320px]">
-      <p class="eyebrow mb-1" style="color:var(--coral)">Question 3 of 8</p>
-      <h4 class="font-display text-xl mb-5 leading-snug">A packed week feels most like you when it's...</h4>
-      <div class="space-y-3">
-        <div class="chip w-full text-left on">Structured — training, a schedule, clear goals</div>
-        <div class="chip w-full text-left">Social — hanging out matters more than output</div>
-        <div class="chip w-full text-left">Creative — making something from nothing</div>
-      </div>
-      <div class="mt-6 h-1.5 rounded-full bg-[var(--paper-dim)] overflow-hidden">
-        <div class="h-full" style="width:37%; background:var(--coral)"></div>
-      </div>
-    </div>
-  </div>
-  <div class="reveal order-2">
-    <p class="eyebrow mb-3" style="color:var(--moss)">Feature 02</p>
-    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">A 2-minute quiz that shortlists CCAs for you, on day one.</h3>
-    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
-      During onboarding, answer a handful of questions about how you like to spend your time and what
-      you're looking for — community, competition, creative outlet, resume line. ok!cca matches you to
-      CCAs worth exploring first, instead of scrolling through all of them cold.
-    </p>
-    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">No wrong answers, just a better starting point</p>
-  </div>
-</section>
-
 <!-- FEATURE 3: WISHLIST -->
 <section class="max-w-6xl mx-auto px-6 md:px-8 py-16 md:py-24 border-t-2 border-[var(--ink)]/10 grid md:grid-cols-2 gap-14 items-center">
-  <div class="reveal justify-self-center order-1 md:order-1">
-    <div class="card-hard rounded-2xl p-4 bg-white w-[330px] sm:w-[360px] shadow-[0_12px_24px_rgba(71,29,57,0.06)]">
-      <div class="mb-4 flex items-center justify-between">
-        <p class="eyebrow" style="color:var(--coral)">Saved</p>
-        <span class="font-mono text-[0.65rem] uppercase tracking-wide rounded-full border-2 border-[var(--ink)] px-2 py-1 bg-[var(--paper-dim)]">3 items</span>
+  <div class="feature-media-shell reveal order-1 md:order-1">
+    <div class="saved-card-panel">
+      <div class="saved-card-header">
+        <div class="label">Saved</div>
+        <div class="saved-badge">3 items</div>
       </div>
-      <div class="space-y-3" style="font-family: 'Nunito Sans', sans-serif;">
-        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-[var(--paper-dim)] p-2.5 shadow-[inset_0_0_0_1px_rgba(71,29,57,0.03)]" style="background:rgba(244,235,221,0.96);">
-          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--sunshine)] text-center" style="background:rgba(247,200,106,0.75);">
-            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Aug</span>
-            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">31</span>
+
+      <div class="saved-list">
+        <div class="saved-item" data-tone="warm">
+          <div class="saved-date">
+            <span class="month">Aug</span>
+            <span class="day">31</span>
           </div>
-          <div class="min-w-0 flex-1">
-            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">NUS Dance Blast</p>
-            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Recruitment deadline</p>
-            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
-              <span>⏱</span>
-              <span>11:59pm</span>
-            </div>
+          <div class="meta">
+            <div class="club">NUS Dance Blast</div>
+            <div class="title">Recruitment deadline</div>
+            <div class="time">11:59PM</div>
           </div>
-          <button aria-label="Reminder for NUS Dance Blast" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--coral)] text-white" title="Set reminder">
-            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
-              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
-            </svg>
-          </button>
+          <div class="action">⎋</div>
         </div>
 
-        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-white p-2.5 shadow-[0_3px_0_rgba(71,29,57,0.04)]">
-          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--paper-dim)] text-center" style="background:rgba(244,235,221,0.9);">
-            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Sep</span>
-            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">02</span>
+        <div class="saved-item" data-tone="soft">
+          <div class="saved-date">
+            <span class="month">Sep</span>
+            <span class="day">02</span>
           </div>
-          <div class="min-w-0 flex-1">
-            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">Netball Club</p>
-            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Open trial</p>
-            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
-              <span>⏱</span>
-              <span>5:30pm</span>
-            </div>
+          <div class="meta">
+            <div class="club">Netball Club</div>
+            <div class="title">Open trial</div>
+            <div class="time">5:30PM</div>
           </div>
-          <button aria-label="Reminder for Netball Club" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)]" title="Set reminder">
-            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
-              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
-            </svg>
-          </button>
+          <div class="action">⎋</div>
         </div>
 
-        <div class="flex items-center gap-3 rounded-xl border border-[var(--ink)] bg-[var(--moss-soft)] p-2.5 shadow-[0_3px_0_rgba(71,29,57,0.04)]" style="background:rgba(221,236,230,0.9);">
-          <div class="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl border border-[var(--ink)] bg-[var(--sunshine)] text-center" style="background:rgba(247,200,106,0.75);">
-            <span class="font-mono text-[0.56rem] font-semibold uppercase tracking-wide" style="font-family:'IBM Plex Mono', monospace; color:rgba(27,27,47,0.72);">Sep</span>
-            <span class="text-[1.55rem] leading-none" style="font-weight:700; color:var(--ink);">05</span>
+        <div class="saved-item" data-tone="mint">
+          <div class="saved-date">
+            <span class="month">Sep</span>
+            <span class="day">05</span>
           </div>
-          <div class="min-w-0 flex-1">
-            <p class="font-mono text-[0.62rem] uppercase tracking-[0.12em]" style="color:rgba(27,27,47,0.72);">Mountaineering</p>
-            <p class="mt-1 text-[1.08rem] font-bold leading-tight" style="color:var(--ink);">Camp sign-up</p>
-            <div class="mt-2 flex items-center gap-2 font-mono text-[0.6rem] uppercase tracking-wide" style="color:rgba(27,27,47,0.7);">
-              <span>⏱</span>
-              <span>8:00pm</span>
-            </div>
+          <div class="meta">
+            <div class="club">Mountaineering</div>
+            <div class="title">Camp sign-up</div>
+            <div class="time">8:00PM</div>
           </div>
-          <button aria-label="Reminder for Mountaineering" class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)]" title="Set reminder">
-            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current" aria-hidden="true">
-              <path d="M12 2a5 5 0 0 1 5 5v3.59l1.7 3.4A1 1 0 0 1 17.75 16h-11.5A1 1 0 0 1 5.3 14.99L7 11.59V7a5 5 0 0 1 5-5Zm0 20a2.5 2.5 0 0 1-2.45-2h4.9A2.5 2.5 0 0 1 12 22Zm-5.5-6h11l-1.2-2.4V7a3.5 3.5 0 1 0-7 0v6.6L6.5 16Z"/>
-            </svg>
-          </button>
+          <div class="action">⎋</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="reveal order-2 md:order-2">
-    <p class="eyebrow mb-3" style="color:var(--moss)">Feature 03</p>
-    <h3 class="font-display text-3xl sm:text-4xl mb-5 leading-tight">Wishlist the CCAs and events you want to track.</h3>
-    <p class="text-[1.02rem] mb-4" style="color:rgba(27,27,47,0.8)">
+
+  <div class="reveal feature-copy-block order-2 md:order-2">
+    <p class="eyebrow mb-3" style="color:var(--moss)">Feature 03 · Decide</p>
+    <h3>Wishlist the CCAs and events you want to track.</h3>
+    <p>
       Save the clubs and events that catch your eye and keep them in one place as you explore your options.
-      It turns browsing into a shortlist, so you can revisit open trials, camp sign-ups, and the CCAs
-      worth a second look without losing track.
+      It turns browsing into a shortlist, so you can revisit open trials, camp sign-ups, and the CCAs worth a second look without losing track.
     </p>
-    <p class="font-mono text-xs uppercase tracking-wide" style="color:var(--moss)">Keep your shortlist in one clean home</p>
+    <span class="tagline">Keep your shortlist in one clean home</span>
   </div>
 </section>
 
@@ -1059,8 +1353,7 @@
       <div class="card-hard rounded-2xl p-5" style="background:var(--sunshine)">
         <p class="font-mono text-xs uppercase tracking-wider mb-1">Launch perk</p>
         <p class="text-sm font-semibold">
-          The first 100 sign-ups get an invite to our launch event — a mini student life fair where
-          every participating CCA sets up a booth in one afternoon.
+          Don't miss out on our week-long launch event! Users that have reserved their spot will get to sign up for open sessions hosted by various CCAs!
         </p>
       </div>
     </div>
@@ -1115,8 +1408,6 @@
   // Swipe the story cards to bring the next card to the front.
   const storyStack = document.querySelector('.story-stack');
   const storyCards = [...storyStack.querySelectorAll('.story-card')];
-  const leftArrow = document.querySelector('.story-arrow.left');
-  const rightArrow = document.querySelector('.story-arrow.right');
   let activeStory = 0;
   let pointerStartX = null;
 
@@ -1156,25 +1447,59 @@
     renderStories();
   }
 
-  leftArrow.addEventListener('click', () => moveStory(-1));
-  rightArrow.addEventListener('click', () => moveStory(1));
+  let autoRotateTimer = null;
+
+  function startAutoRotate() {
+    stopAutoRotate();
+    autoRotateTimer = window.setInterval(() => moveStory(1), 2600);
+  }
+
+  function stopAutoRotate() {
+    if (autoRotateTimer) {
+      window.clearInterval(autoRotateTimer);
+      autoRotateTimer = null;
+    }
+  }
 
   storyStack.addEventListener('pointerdown', (event) => {
     pointerStartX = event.clientX;
     storyStack.setPointerCapture(event.pointerId);
+    stopAutoRotate();
   });
   storyStack.addEventListener('pointerup', (event) => {
     if (pointerStartX === null) return;
     const distance = event.clientX - pointerStartX;
     if (Math.abs(distance) > 45) moveStory(distance < 0 ? 1 : -1);
     pointerStartX = null;
+    startAutoRotate();
   });
-  storyStack.addEventListener('pointercancel', () => { pointerStartX = null; });
+  storyStack.addEventListener('pointercancel', () => {
+    pointerStartX = null;
+    startAutoRotate();
+  });
   storyStack.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowLeft') moveStory(-1);
     if (event.key === 'ArrowRight') moveStory(1);
+    startAutoRotate();
   });
+  storyStack.addEventListener('mouseenter', stopAutoRotate);
+  storyStack.addEventListener('mouseleave', startAutoRotate);
   renderStories();
+  startAutoRotate();
+
+  const sprinkleColors = ['var(--coral)', 'var(--sunshine)', 'var(--moss)', 'rgba(71,29,57,0.24)'];
+  const sprinkleContainer = document.getElementById('background-dots');
+  for (let i = 0; i < 28; i += 1) {
+    const dot = document.createElement('span');
+    const size = 6 + Math.random() * 16;
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.left = `${Math.random() * 100}%`;
+    dot.style.top = `${Math.random() * 100}%`;
+    dot.style.background = sprinkleColors[i % sprinkleColors.length];
+    dot.style.opacity = String(0.32 + Math.random() * 0.5);
+    sprinkleContainer.appendChild(dot);
+  }
 
   document.querySelectorAll('.profile-tab').forEach((tab) => {
     tab.addEventListener('click', () => {
