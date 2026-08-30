@@ -74,6 +74,117 @@
     border-radius:1.5rem;
   }
 
+  .problem-layout{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:1.2rem;
+    width:min(100%, 920px);
+    align-items:stretch;
+  }
+
+  .problem-side,
+  .problem-stacked{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    width:100%;
+  }
+
+  .problem-side .problem-point-card,
+  .problem-step{
+    width:100%;
+    min-height:7.8rem;
+  }
+
+  .problem-point-card {
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    padding:0.8rem 0.9rem 0.8rem 0.75rem;
+    border:2px solid rgba(71,29,57,0.12);
+    border-radius:1.35rem;
+    background:rgba(255,255,255,0.32);
+    box-shadow:0 4px 0 rgba(71,29,57,0.04);
+    color:rgba(27,27,47,0.85);
+    font-size:0.9rem;
+    line-height:1.26;
+  }
+
+  .problem-point-arrow {
+    color:var(--coral);
+    font-weight:900;
+    font-size:1.2rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+
+  .problem-point-text {
+    flex:1;
+  }
+
+  .problem-step{
+    display:grid;
+    grid-template-columns: minmax(52px, 82px) minmax(0, 1fr);
+    align-items:center;
+    gap:0.9rem;
+    padding:0.8rem 0.9rem 0.8rem 0.7rem;
+    min-height:7.8rem;
+    border:2px solid rgba(71,29,57,0.12);
+    border-radius:1.35rem;
+    background:rgba(255,255,255,0.32);
+    box-shadow:0 4px 0 rgba(71,29,57,0.04);
+  }
+
+  .problem-index{
+    color:var(--coral);
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    line-height:0.85;
+    font-weight:900;
+    letter-spacing:-0.08em;
+    text-align:left;
+    transform:translateY(-0.08em);
+  }
+
+  .problem-copy h3{
+    margin:0 0 0.2rem;
+    color:var(--ink);
+    font-size:clamp(1.3rem, 2.3vw, 2.2rem);
+    line-height:1.1;
+    font-weight:900;
+    letter-spacing:-0.04em;
+  }
+
+  .problem-copy p{
+    margin:0;
+    color:rgba(71,29,57,0.82);
+    font-size:clamp(0.9rem, 1.3vw, 1.25rem);
+    line-height:1.26;
+    max-width:34ch;
+  }
+
+  @media (max-width: 640px){
+    .problem-layout{
+      grid-template-columns: 1fr;
+    }
+
+    .problem-step{
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap:0.5rem;
+      min-height:6.8rem;
+      padding:0.7rem 0.75rem 0.7rem 0.6rem;
+      border-radius:1.1rem;
+    }
+
+    .problem-copy h3{
+      font-size:1.7rem;
+    }
+
+    .problem-copy p{
+      font-size:0.95rem;
+      max-width:none;
+    }
+  }
+
   .cca-profile-card{
     width:min(100%, 350px);
     max-width:100%;
@@ -631,24 +742,48 @@
     </h2>
   </div>
 
-  <div class="grid md:grid-cols-2 gap-6">
-    <div class="reveal card-hard rounded-2xl p-7 bg-white">
-      <p class="eyebrow mb-4" style="color:var(--coral)">Without ok!cca</p>
-      <ul class="space-y-3 text-[0.95rem]" style="color:rgba(27,27,47,0.85)">
-        <li>→ Six different Telegram/Instagram channels to track, half of them inactive</li>
-        <li>→ Official descriptions that all read the same: "passionate", "family", "come join us!"</li>
-        <li>→ The honest take only exists if you happen to know a member</li>
-        <li>→ You commit to a CIP/CCA point requirement before you know if it's a fit</li>
-      </ul>
+  <div class="problem-layout reveal">
+    <div class="problem-side">
+      <p class="eyebrow mb-1" style="color:var(--coral)">Without ok!cca</p>
+      <div class="problem-point-card">
+        <span class="problem-point-arrow">→</span>
+        <span class="problem-point-text">Six different Telegram/Instagram channels to track, half of them inactive</span>
+      </div>
+      <div class="problem-point-card">
+        <span class="problem-point-arrow">→</span>
+        <span class="problem-point-text">Official descriptions that all read the same: "passionate", "family", "come join us!"</span>
+      </div>
+      <div class="problem-point-card">
+        <span class="problem-point-arrow">→</span>
+        <span class="problem-point-text">You realised in the middle of your tutorial that tryouts were yesterday</span>
+      </div>
     </div>
-    <div class="reveal card-hard rounded-2xl p-7" style="background:var(--ink); color:var(--paper)">
-      <p class="eyebrow mb-4" style="color:var(--sunshine)">With ok!cca</p>
-      <ul class="space-y-3 text-[0.95rem]" style="color:rgba(250,246,239,0.9)">
-        <li>→ Every CCA in one place, posting real updates the way they'd post on Instagram</li>
-        <li>→ "Day in the life" posts from actual members — the commitments, the fun, the fine print</li>
-        <li>→ A 2-minute onboarding quiz that shortlists CCAs based on how you actually want to spend your time</li>
-        <li>→ Know the vibe before the first meeting, not after three</li>
-      </ul>
+
+    <div class="problem-stacked">
+      <p class="eyebrow mb-1" style="color:var(--sunshine)">With ok!cca</p>
+      <div class="problem-step">
+        <div class="problem-index">01</div>
+        <div class="problem-copy">
+          <h3>Discover</h3>
+          <p>Find CCAs beyond the usual suspects — matched to how you want to spend your time.</p>
+        </div>
+      </div>
+
+      <div class="problem-step">
+        <div class="problem-index">02</div>
+        <div class="problem-copy">
+          <h3>Understand</h3>
+          <p>Get the honest version: member reviews, real commitment, and the community vibe.</p>
+        </div>
+      </div>
+
+      <div class="problem-step">
+        <div class="problem-index">03</div>
+        <div class="problem-copy">
+          <h3>Decide</h3>
+          <p>Save what excites you and keep track of the events that make it feel real.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
