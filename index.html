@@ -91,10 +91,12 @@
 
   .problem-layout{
     display:grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    grid-template-columns: 1fr;
     gap:1.4rem;
-    width:min(100%, 980px);
+    width:min(100%, 600px);
+    margin-inline:auto;
     align-items:stretch;
+    justify-items:center;
   }
 
   .problem-intro,
@@ -1029,7 +1031,7 @@
       <a href="#join" class="btn-primary font-mono text-sm uppercase tracking-wider px-6 py-3 rounded-full inline-block">
         Reserve your spot →
       </a>
-      <span class="font-mono text-xs" style="color:rgba(27,27,47,0.6)">First 100 get into the launch fair</span>
+      <span class="font-mono text-xs" style="color:rgba(27,27,47,0.6)">First 100 get exclusive merch</span>
     </div>
   </div>
 
@@ -1351,7 +1353,7 @@
       <div class="card-hard rounded-2xl p-5" style="background:var(--sunshine)">
         <p class="font-mono text-xs uppercase tracking-wider mb-1">Launch perk</p>
         <p class="text-sm font-semibold">
-          Don't miss out on our week-long launch event! Users that have reserved their spot will get to sign up for open sessions hosted by various CCAs!
+          Don't miss out! First 100 users get exclusive CCA merch like laptop stickers, club shirts and tote bags!
         </p>
       </div>
     </div>
@@ -1389,7 +1391,7 @@
       <div id="success-state" class="hidden card-hard rounded-2xl p-8 bg-white text-center">
         <p class="eyebrow mb-2" style="color:var(--moss)">You're on the list</p>
         <p class="font-display text-2xl mb-2">Spot <span id="queue-number" style="color:var(--coral)"></span> reserved.</p>
-        <p class="text-sm" style="color:rgba(27,27,47,0.75)">We'll email you the moment ok!cca opens — and if you're in the first 100, your launch fair invite too.</p>
+        <p class="text-sm" style="color:rgba(27,27,47,0.75)">We'll email you the moment ok!cca opens — and if you're in the first 100, you get to collect exclusive CCA merch as well.</p>
       </div>
     </div>
   </div>
